@@ -16,6 +16,23 @@ class _HomeState extends State<Home> {
         title: brandName(),
         elevation: 0.0,
       ),
+      body: Container(child: Column(
+        children: <Widget>[
+          Container(
+            
+            child: Row(children: <Widget>[
+              Expanded(
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText : "search"
+                ),
+              ),
+              ),
+              Icon(Icons.search)
+            ],),
+          )
+        ],
+      ),),
     );
   }
 }
