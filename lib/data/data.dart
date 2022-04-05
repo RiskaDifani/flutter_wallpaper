@@ -1,5 +1,6 @@
-
 import 'package:flutter_wallpaper/model/categories_model.dart';
+
+String apiKEY = "563492ad6f917000010000015c733431cdaa4d32b4211148e30051be";
 
 List<CategorieModel> getCategories(){
   List<CategorieModel> categories = [];
