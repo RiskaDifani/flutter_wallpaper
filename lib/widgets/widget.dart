@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_wallpaper/model/wallpaper_model.dart';
+import 'package:flutter_wallpaper/views/image_view.dart';
 
 Widget brandName() {
   return Row(
@@ -20,7 +21,7 @@ Widget brandName() {
 
 
 Widget WallpapersList({required List<WallpaperModel> wallpapers, context}) {
-  return Container(
+   return Container(
     padding: EdgeInsets.symmetric(horizontal: 16),
     child: GridView.count(
       shrinkWrap: true,
@@ -29,13 +30,27 @@ Widget WallpapersList({required List<WallpaperModel> wallpapers, context}) {
       childAspectRatio: 0.6,
       mainAxisSpacing: 6.0,
       crossAxisSpacing: 6.0,
-      children: wallpapers.map((WallpaperModel wallpaper) {
+      children: wallpapers.map((wallpaper) {
         return GridTile(
-            child: Container(
-     
-                  child: Image.network(wallpaper.src!.portrait!),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ImageView(
+                            imgUrl: wallpaper.src!.portrait!,
+                          )));
+            },
+            child: Hero(
+              tag: wallpaper.src!.portrait!,
+              child: Container(
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.network(wallpaper.src!.portrait!)),
+              ),
             ),
-          );
+          ),
+        );
       }).toList(),
     ),
   );
