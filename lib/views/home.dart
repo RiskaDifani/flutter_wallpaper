@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_wallpaper/data/data.dart';
 import 'package:flutter_wallpaper/model/categories_model.dart';
 import 'package:flutter_wallpaper/model/wallpaper_model.dart';
+import 'package:flutter_wallpaper/views/catagorie.dart';
+import 'package:flutter_wallpaper/views/search.dart';
 import 'package:flutter_wallpaper/widgets/widget.dart';
 import 'package:http/http.dart' as http;
 
@@ -103,6 +105,7 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 16,
             ),
+             WallpapersList(wallpapers: photo, context: context),
             // WallpapersList(wallpapers: photo, context: context),
           ],
         )),
@@ -152,7 +155,7 @@ class CategoriesTile extends StatelessWidget {
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
                   fontSize: 16),
-            ), // Gejlas
+            ), 
           )
         ]),
       ),
