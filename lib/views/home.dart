@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   ScrollController _scrollController = new ScrollController();
 
   List<CategorieModel> categories = [];
-  List<WallpaperModel> photo = [];
+  List<WallpaperModel> wallpapers = [];
 
   void initState() {
     getTrendingWallpaper();
@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
       jsonData["photos"].forEach((element) {
         WallpaperModel wallpaperModel = new WallpaperModel();
         wallpaperModel = WallpaperModel.fromMap(element);
-        photo.add(wallpaperModel);
+        wallpapers.add(wallpaperModel);
       });
 
       setState(() {});
@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 16,
             ),
-             WallpapersList(wallpapers: photo, context: context),
+             WallpapersList(wallpapers: wallpapers, context: context),
             // WallpapersList(wallpapers: photo, context: context),
           ],
         )),
@@ -156,7 +156,8 @@ class CategoriesTile extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   fontSize: 16),
             ), 
-          )
+          ),
+          
         ]),
       ),
     );

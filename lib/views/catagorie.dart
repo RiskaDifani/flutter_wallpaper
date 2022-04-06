@@ -12,10 +12,10 @@ class Categorie extends StatefulWidget {
 }
 
 class _CategorieState extends State<Categorie> {
-  List<WallpaperModel> photo = [];
+  List<WallpaperModel> wallpapers = [];
 
-  getSearchWallpapers(String query) async{
-    var response = await http.get(Uri.parse("https://api.pexels.com/v1/search?query=$query&per_page=15&page=1"), 
+  getSearchWallpapers() async{
+    var response = await http.get(Uri.parse("https://api.pexels.com/v1/search?query=${widget.categorieName}&per_page=15&page=1"), 
     headers: {"Authorization": apiKEY});
 
     // print(response.body.toString());
@@ -25,7 +25,7 @@ class _CategorieState extends State<Categorie> {
       // print(element);
       WallpaperModel wallpaperModel = new WallpaperModel();
       wallpaperModel = WallpaperModel.fromMap(element);
-      photo.add(wallpaperModel);
+      wallpapers.add(wallpaperModel);
     });
 
     setState(() {
@@ -35,7 +35,7 @@ class _CategorieState extends State<Categorie> {
   
   @override
   void initState() {
-    getSearchWallpapers(widget.categorieName);
+    getSearchWallpapers();
     super.initState();
   }
   Widget build(BuildContext context) {
@@ -43,17 +43,19 @@ class _CategorieState extends State<Categorie> {
       appBar: AppBar(
         title: brandName(),
           elevation: 0.0,
+          actions: <Widget>[
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+            )
+          ],
         ),
       body: SingleChildScrollView(
         child: Container(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 16,
-                ),
-                
-              ],
-            )
+            child: WallpapersList(wallpapers: wallpapers ,context: context)
         ),
       )
     );

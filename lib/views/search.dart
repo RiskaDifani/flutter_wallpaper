@@ -16,8 +16,9 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  List<WallpaperModel> photos = [];
+  List<WallpaperModel> wallpapers = [];
   TextEditingController search = TextEditingController();
+
 
   getSearchWallpaper(String searchQuery) async {
     await http.get(
@@ -30,7 +31,7 @@ class _SearchState extends State<Search> {
         //print(element);
         WallpaperModel wallpaperModel = new WallpaperModel();
         wallpaperModel = WallpaperModel.fromMap(element);
-        photos.add(wallpaperModel);
+        wallpapers.add(wallpaperModel);
         //print(photosModel.toString()+ "  "+ photosModel.src.portrait);
       });
 
@@ -73,17 +74,22 @@ class _SearchState extends State<Search> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {
-                        getSearchWallpaper(search.text);
-                      },
-                      child: Container(child: Icon(Icons.search)),
-                    )
+                      onTap: (() {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Search(
+                                      search: search.text,
+                                    )));
+                      }),
+                      child: Container(child: Icon(Icons.search))),
                   ],
                 ),
               ),
               SizedBox(
                 height: 16,
               ),
+              WallpapersList(wallpapers: wallpapers, context: context)
             ],
           ),
         ),

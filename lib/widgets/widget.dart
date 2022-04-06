@@ -29,7 +29,7 @@ Widget WallpapersList({required List<WallpaperModel> wallpapers, context}) {
       childAspectRatio: 0.6,
       mainAxisSpacing: 6.0,
       crossAxisSpacing: 6.0,
-      children: wallpapers.map((wallpaper) {
+      children: wallpapers.map((WallpaperModel wallpaper) {
         return GridTile(
             child: Container(
      
